@@ -16,35 +16,29 @@ public class Server {
     }
 
     public void startServer() {
-
-        try{
-            System.out.println(" SERVER : server is waiting for clients");
-            while(!serverSocket.isClosed()){
+        try {
+            System.out.println("[SERVER] server is waiting for clients");
+            while (!serverSocket.isClosed()) {
                 Socket socket = serverSocket.accept();
-                System.out.println("SERVER : server is accept a new client");
+                System.out.println("[SERVER] server is accept a new client");
 
                 Thread thread = new Thread(new ClientHandler(socket));
                 thread.start();
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             closeServer();
-            e.printStackTrace();
         }
-
     }
 
     private void closeServer() {
-
         try {
             if (serverSocket != null) {
-                System.out.println("SERVER : server is closed");
+                System.out.println("[SERVER] server is closed");
                 serverSocket.close();
             }
-            System.out.println("SERVER : server is closed");
-
-        }catch (IOException e) {
+            System.out.println("[SERVER] server is closed");
+        } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
         }
     }
 

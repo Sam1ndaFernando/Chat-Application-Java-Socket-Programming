@@ -16,24 +16,22 @@ public class ClientHandler implements Runnable {
     public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>();
 
     public ClientHandler(Socket socket) {
-
-        try{
+        try {
             this.socket = socket;
             this.dataInputStream = new DataInputStream(socket.getInputStream());
             this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
             this.userName = dataInputStream.readUTF();
-            this.clientHandlers.add(this); //add client handler to array list
-            serverMessage("SERVER : " + userName + " is joined the chat");
-        }catch (IOException e){
-            e.printStackTrace();
+            clientHandlers.add(this);  //add this instance for clientHandler arraylist
+            serverMessage("[SERVER] -" + userName + " is joined the chat");
+        } catch (IOException e) {
+            close(socket, dataOutputStream, dataInputStream);
         }
     }
 
     private void serverMessage(String message) {
-
         for (ClientHandler clientHandler : clientHandlers) {
             if (!clientHandler.userName.equals(userName)) {
-                clientHandler.sendMessage(message);  //send message to all clients
+                clientHandler.sendMessage(message);
             }
         }
     }
@@ -42,7 +40,7 @@ public class ClientHandler implements Runnable {
         System.out.println(message + "This is reply");
         for (ClientHandler clientHandler : clientHandlers) {
             if (!clientHandler.userName.equals(userName)) {
-                clientHandler.sendMessage(userName + " - " + message); //send message to all clients
+                clientHandler.sendMessage(userName + " - " + message);
             }
         }
     }
@@ -53,7 +51,51 @@ public class ClientHandler implements Runnable {
             dataOutputStream.flush();
         } catch (IOException e) {
             close(socket, dataOutputStream, dataInputStream);
-            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void run() {
+        while (socket.isConnected()) {
+            try {
+                String reply = dataInputStream.readUTF();
+                if ("--image--".equals(reply)) {
+                    readImage();  //read image from client
+                } else {
+                    publicMessage(reply);
+                }
+            } catch (IOException e) {
+                close(socket, dataOutputStream, dataInputStream);
+                System.out.println("client socket is closing");
+                break;
+            }
+        }
+    }
+
+    private void readImage() {
+        try {
+            int length = dataInputStream.readInt();
+            byte[] bytes = new byte[length];
+            dataInputStream.readFully(bytes);
+            for (ClientHandler clientHandler : clientHandlers) {
+                if (!clientHandler.userName.equals(userName)) {
+                    clientHandler.sendImage(userName, bytes);
+                }
+            }
+        } catch (IOException e) {
+            close(socket, dataOutputStream, dataInputStream);
+        }
+    }
+
+    private void sendImage(String userName, byte[] bytes) {
+        try {
+            dataOutputStream.writeUTF("--image--");
+            dataOutputStream.writeUTF(userName);
+            dataOutputStream.writeInt(bytes.length);
+            dataOutputStream.write(bytes);
+            dataOutputStream.flush();
+        } catch (IOException e) {
+            close(socket, dataOutputStream, dataInputStream);
         }
     }
 
@@ -74,60 +116,9 @@ public class ClientHandler implements Runnable {
         }
     }
 
-
-
-    @Override
-    public void run() {
-
-        while (socket.isConnected()) {
-            try {
-                String reply = dataInputStream.readUTF();  //read message from client
-                if (" image  ".equals(reply)) {
-                    readImage();
-                } else {
-                    publicMessage(reply);
-                }
-            } catch (IOException e) {
-                close(socket, dataOutputStream, dataInputStream);
-                System.out.println("client socket is closing");
-                break;
-            }
-        }
-    }
-
-    private void readImage() {
-
-        try {
-            int length = dataInputStream.readInt();
-            byte[] bytes = new byte[length];
-            dataInputStream.readFully(bytes);
-            for (ClientHandler clientHandler : clientHandlers) {
-                if (!clientHandler.userName.equals(userName)) {
-                    clientHandler.sendImage(userName, bytes);
-                }
-            }
-        } catch (IOException e) {
-            close(socket, dataOutputStream, dataInputStream);
-        }
-    }
-
-    private void sendImage(String userName, byte[] bytes) {
-
-        try {
-            dataOutputStream.writeUTF(" image ");
-            dataOutputStream.writeInt(bytes.length);
-            dataOutputStream.write(bytes);
-            dataOutputStream.flush();
-        } catch (IOException e) {
-            close(socket, dataOutputStream, dataInputStream);
-        }
-    }
-
     private void removeClientHandler() {
         System.out.println("this is removeClientHandler()");
-        clientHandlers.remove(this);                             //remove client handler from array list
-        serverMessage(" SERVER : " + userName + " is left the chat");
+        clientHandlers.remove(this);
+        serverMessage("SERVER : " + userName + " is left the chat");
     }
-
-
 }

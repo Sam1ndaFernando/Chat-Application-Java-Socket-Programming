@@ -53,7 +53,9 @@ public class LoginFormController implements Initializable {
                         client.readMessage();
                         txtUsrField.setText("");
                         txtPassField.setText("");
+
                         boolean isUpdate = userBO.updateUser(new UserDTO(user.getUserName(), user.getPassword(), 1));
+
                         NotificationUtil.ShowNotification("Successfully", "Successfully login to Chat Room " + user.getUserName(), NotificationUtil.NotificationType.SUCCESS, Duration.seconds(5));
 
                     } catch (IOException e) {

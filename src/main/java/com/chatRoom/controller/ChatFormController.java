@@ -220,7 +220,7 @@ public class ChatFormController implements Initializable {
     }
 
     public void btnDashBoardOnAction(ActionEvent event) {
-        try {
+       /* try {
             ArrayList<UserDTO> userDTOS = userBO.getAllUsers();
 
             HBox hBox = new HBox();
@@ -243,7 +243,7 @@ public class ChatFormController implements Initializable {
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void btnLogoutOnActon(ActionEvent event) throws SQLException, ClassNotFoundException {
