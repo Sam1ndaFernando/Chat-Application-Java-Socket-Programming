@@ -18,7 +18,7 @@ public class Server {
     public void startServer() {
 
         try{
-            System.out.println("[SERVER] server is waiting for clients");
+            System.out.println(" SERVER : server is waiting for clients");
             while(!serverSocket.isClosed()){
                 Socket socket = serverSocket.accept();
                 System.out.println("SERVER : server is accept a new client");

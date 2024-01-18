@@ -45,13 +45,13 @@ public class LoginFormController {
                         txtUsrField.setText("");
                         txtPassField.setText("");
                         boolean isUpdate = userBO.updateUser(new UserDTO(user.getUserName(), user.getPassword(), 1));
-                        NotificationUtil.ShowNotification("Successfully", "Successfully login to ChatRoom " + user.getUserName(), NotificationUtil.NotificationType.SUCCESS, Duration.seconds(5));
+                        NotificationUtil.ShowNotification("Successfully", "Successfully login to Chat Room " + user.getUserName(), NotificationUtil.NotificationType.SUCCESS, Duration.seconds(5));
 
                     } catch (IOException e) {
-                        NotificationUtil.ShowNotification("oops !", "Oops !!! something happened please try again", NotificationUtil.NotificationType.ERROR, Duration.seconds(5));
+                        NotificationUtil.ShowNotification("oops !", "Oops ! something happened to Host", NotificationUtil.NotificationType.ERROR, Duration.seconds(5));
                     }
                 } else if (user.getStatus() == 1) {
-                    NotificationUtil.ShowNotification("oops !", "User is in the ChatRoom", NotificationUtil.NotificationType.INFORMATION, Duration.seconds(5));
+                    NotificationUtil.ShowNotification("oops !", "User is in the Chat Room", NotificationUtil.NotificationType.INFORMATION, Duration.seconds(5));
                 } else {
                     NotificationUtil.ShowNotification("Error", "Enter correct details", NotificationUtil.NotificationType.ERROR, Duration.seconds(5));
                 }
@@ -62,12 +62,11 @@ public class LoginFormController {
     }
 
     @FXML
-    void txtPassFieldOnAction(ActionEvent event) {
+    void txtUsrFieldOnAction(ActionEvent event) {
         txtPassField.requestFocus();
     }
 
-    @FXML
-    void txtUsrFieldOnAction(ActionEvent event) {
+    public void txtPassFieldOnAction(ActionEvent event) {
         btnLaunchOnAction(event);
     }
 

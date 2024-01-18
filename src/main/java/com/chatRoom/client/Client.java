@@ -22,9 +22,10 @@ public class Client {
     public Client(Socket socket, String userName) {
         try {
             this.socket = socket;
-            this.userName = userName;                                                                //read data from server
-            this.dataOutputStream = new DataOutputStream(socket.getOutputStream());                 //send data to server
-            dataOutputStream.writeUTF(userName);                                                   //send username to server
+            this.userName = userName;
+            this.dataInputStream = new DataInputStream(socket.getInputStream());
+            this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            dataOutputStream.writeUTF(userName);
             dataOutputStream.flush();
             launchScene();
         } catch (IOException e) {
@@ -33,10 +34,9 @@ public class Client {
     }
 
     private void launchScene() {
-
         try {
             Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/ChatFrom.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/ChatForm.fxml"));
             stage.setScene(new Scene(fxmlLoader.load()));
             stage.setTitle(userName + "' Room ");
             stage.setResizable(false);
