@@ -3,6 +3,7 @@ package com.chatRoom;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Appinitializer extends Application {
@@ -17,5 +18,7 @@ public class Appinitializer extends Application {
         stage.setResizable(false);
         stage.centerOnScreen();
         stage.setTitle("Start Server Form");
+        Image icon = new Image(getClass().getResourceAsStream("/assets/icon.png"));
+        stage.getIcons().add(icon);
     }
 }

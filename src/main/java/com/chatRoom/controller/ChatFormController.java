@@ -1,5 +1,6 @@
 package com.chatRoom.controller;
 
+import animatefx.animation.Jello;
 import animatefx.animation.Pulse;
 import com.chatRoom.bo.BOFactory;
 import com.chatRoom.bo.custom.UserBO;
@@ -109,48 +110,46 @@ public class ChatFormController implements Initializable {
         FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Files", "*.jpg", "*.png", "*.jpeg");
         fileChooser.getExtensionFilters().add(extensionFilter);
         File file = fileChooser.showOpenDialog(new Stage());
+
         if (file != null) {
             try {
-
-                //Set selected image for sender's Chat Room
+                // set selected image for sender's chat room
                 ImageView imageView = new ImageView(new Image(new FileInputStream(file)));
                 imageView.setFitHeight(200);
                 imageView.setFitWidth(200);
 
-                //Create Hbox for add properties
+                // create hbox for add properties
                 HBox hBox = new HBox();
                 hBox.setStyle("-fx-alignment: center-right; -fx-fill-height: true; -fx-min-height: 50px; -fx-pref-width: 520px; -fx-max-width: 520px; -fx-padding: 10px; ");
 
-                //Ask user need to send image to the Chat Room
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Do you need to send this " + file.getName() + " image to chat room ?", ButtonType.OK, ButtonType.NO);
-                alert.setTitle("Send Image");
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == ButtonType.OK) {
-                    System.out.println("send image to ChatRoom");
+                System.out.println("Send image to ChatRoom");
 
-                    //Create byte array and send it to client
-                    byte[] bytes = Files.readAllBytes(file.toPath());
-                    client.sendImage(bytes);
-                    hBox.getChildren().add(imageView);
-                    vbox.getChildren().add(hBox);
-                }
+                // create byte array and send it to client
+                byte[] bytes = Files.readAllBytes(file.toPath());
+                client.sendImage(bytes);
+
+                // add the image view to the hbox and hbox to the vbox
+                hBox.getChildren().add(imageView);
+                vbox.getChildren().add(hBox);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
+
     @FXML
     void btnSendOnAction(ActionEvent event) {
         client.sendMessage(txtField.getText());
 
-        // Create Hbox and set the style properties of the HBox
+        // create hbox and set the style properties of the hbox
         HBox hBox = new HBox();
         hBox.setStyle("-fx-alignment: center-right; -fx-fill-height: true; -fx-min-height: 50; -fx-pref-width: 520; -fx-max-width: 520; -fx-padding: 10");
 
-        // Create Label and add it to the HBox
+        // create label and add it to the HBox
         Label label = new Label(txtField.getText());
-        label.setStyle(" -fx-alignment: center-left; -fx-background-color:  #00D1FF; -fx-background-radius:15px 0px 15px 15px; -fx-font-size: 18; -fx-text-fill: #FFFFFF; -fx-wrap-text: true; -fx-content-display: left; -fx-max-width: 350; -fx-padding: 10;");
+        label.setStyle(" -fx-alignment: center-left; -fx-background-color: #006865; -fx-background-radius:15px 0px 15px 15px; -fx-font-size: 18; -fx-text-fill: #FFFFFF; -fx-wrap-text: true; -fx-content-display: left; -fx-max-width: 350; -fx-padding: 10;");
         hBox.getChildren().add(label);
         vbox.getChildren().add(hBox);
         txtField.setText("");
@@ -162,11 +161,11 @@ public class ChatFormController implements Initializable {
     }
 
     public void writeMessage(String message) {
-        // Create Hbox and set the style properties of the HBox
+        // create hbox and set the style properties of the hbox
         HBox hBox = new HBox();
         hBox.setStyle("-fx-alignment: center-left; -fx-fill-height: true; -fx-min-height: 50px; -fx-pref-width: 520px; -fx-max-width: 520px; -fx-padding: 10px");
 
-        // Create Label and add it to the HBox
+        // create label and add it to the HBox
         Label label = new Label(message);
         label.setStyle(" -fx-alignment: center-left; -fx-background-color:  #A537CA; -fx-background-radius:0px 15px 15px 15px; -fx-font-size: 18px; -fx-text-fill: #FFFFFF; -fx-wrap-text: true; -fx-content-display: left; -fx-max-width: 350px; -fx-padding: 10px;");
         hBox.getChildren().add(label);
@@ -184,7 +183,7 @@ public class ChatFormController implements Initializable {
         hBox.setStyle("-fx-alignment: center-left;-fx-fill-height: true; -fx-min-height: 50px; -fx-pref-width: 520px; -fx-max-width: 520px; -fx-padding: 10px");
 
         Label label = new Label(sender);
-        label.setStyle(" -fx-alignment: center-left; -fx-background-color:  #45bea8; -fx-background-radius:15px; -fx-font-size: 18px; -fx-text-fill: #ffffff; -fx-wrap-text: true; -fx-content-display: left; -fx-max-width: 350px; -fx-padding: 10px;");
+        label.setStyle(" -fx-alignment: center-left; -fx-background-color: #45bea8; -fx-background-radius:15px; -fx-font-size: 18px; -fx-text-fill: #ffffff; -fx-wrap-text: true; -fx-content-display: left; -fx-max-width: 350px; -fx-padding: 10px;");
         Platform.runLater(() -> {
             ImageView imageView = new ImageView(new Image(new ByteArrayInputStream(bytes)));
             imageView.setFitWidth(200);
@@ -198,19 +197,43 @@ public class ChatFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         emojiBar.setVisible(false);
         createEmojiBar();
-        new Pulse(root).play();
+        new Jello(root).play();
     }
 
+    /*private void createEmojiBar() {
+        int btnIndex = 0;
+        for (int row = 0; row < 4; row++) {
+            for (int column = 0; column < 5; column++) {
+                if (btnIndex < emojis.length) {
+                    JFXButton button = new JFXButton(emojis[btnIndex]);
+                    button.setStyle("-fx-background-radius:20px;-fx-text-alignment: center; -fx-background-color: #B1FFECFF;");
+                    button.setAlignment(Pos.CENTER);
+                    emojiPane.add(button, column, row);
+                    button.setOnAction(event -> {
+                        txtField.appendText(button.getText());
+                    });
+                    btnIndex++;
+                }
+            }
+        }
+    }*/
     private void createEmojiBar() {
         int btnIndex = 0;
         for (int row = 0; row < 4; row++) {
             for (int column = 0; column < 5; column++) {
                 if (btnIndex < emojis.length) {
                     JFXButton button = new JFXButton(emojis[btnIndex]);
-                    button.setStyle("-fx-background-radius:20px;-fx-text-alignment: center; -fx-background-color: #b7fffc;");
+
+                    // apply different styles to each button
+                    if (btnIndex % 2 == 0) {
+                        button.setStyle("-fx-background-radius:20px;-fx-text-alignment: center; -fx-background-color: #B1FFECFF; -fx-text-fill: #000000;");
+                    } else {
+                        button.setStyle("-fx-background-radius:20px;-fx-text-alignment: center; -fx-background-color: #FFD700; -fx-text-fill: #000000;");
+                    }
                     button.setAlignment(Pos.CENTER);
                     emojiPane.add(button, column, row);
-                    button.setOnAction(event -> {
+
+                    button.setOnAction(event -> {            // add event handler to each button
                         txtField.appendText(button.getText());
                     });
                     btnIndex++;

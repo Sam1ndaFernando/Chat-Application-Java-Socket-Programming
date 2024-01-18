@@ -22,7 +22,7 @@ public class ClientHandler implements Runnable {
             this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
             this.userName = dataInputStream.readUTF();
             clientHandlers.add(this);  //add this instance for clientHandler arraylist
-            serverMessage("[SERVER] -" + userName + " is joined the chat");
+           // serverMessage("[SERVER] -" + userName + " is joined the chat");
         } catch (IOException e) {
             close(socket, dataOutputStream, dataInputStream);
         }
@@ -40,7 +40,7 @@ public class ClientHandler implements Runnable {
         System.out.println(message + "This is reply");
         for (ClientHandler clientHandler : clientHandlers) {
             if (!clientHandler.userName.equals(userName)) {
-                clientHandler.sendMessage(userName + " - " + message);
+                clientHandler.sendMessage(userName + " : " + message);
             }
         }
     }
@@ -119,6 +119,6 @@ public class ClientHandler implements Runnable {
     private void removeClientHandler() {
         System.out.println("this is removeClientHandler()");
         clientHandlers.remove(this);
-        serverMessage("SERVER : " + userName + " is left the chat");
+        //serverMessage("SERVER : " + userName + " is left the chat");
     }
 }

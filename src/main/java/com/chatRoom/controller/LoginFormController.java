@@ -49,7 +49,7 @@ public class LoginFormController implements Initializable {
             if (user != null) {
                 if (user.getPassword().equals(txtPassField.getText()) && user.getStatus() == 0) {
                     try {
-                        Client client = new Client(new Socket("localhost", 3002), txtUsrField.getText());
+                        Client client = new Client(new Socket("localhost", 3535), txtUsrField.getText());
                         client.readMessage();
                         txtUsrField.setText("");
                         txtPassField.setText("");
@@ -59,12 +59,12 @@ public class LoginFormController implements Initializable {
                         NotificationUtil.ShowNotification("Successfully", "Successfully login to Chat Room " + user.getUserName(), NotificationUtil.NotificationType.SUCCESS, Duration.seconds(5));
 
                     } catch (IOException e) {
-                        NotificationUtil.ShowNotification("oops !", "Oops ! something happened to Host", NotificationUtil.NotificationType.ERROR, Duration.seconds(5));
+                        NotificationUtil.ShowNotification("Oops !!!!", "Oops ! something happened to Host", NotificationUtil.NotificationType.ERROR, Duration.seconds(5));
                     }
                 } else if (user.getStatus() == 1) {
-                    NotificationUtil.ShowNotification("oops !", "User is in the Chat Room", NotificationUtil.NotificationType.INFORMATION, Duration.seconds(5));
+                    NotificationUtil.ShowNotification("Oops !!!!", "User is in the Chat Room", NotificationUtil.NotificationType.INFORMATION, Duration.seconds(5));
                 } else {
-                    NotificationUtil.ShowNotification("Error", "Enter correct details", NotificationUtil.NotificationType.ERROR, Duration.seconds(5));
+                    NotificationUtil.ShowNotification("Error", "invalid details", NotificationUtil.NotificationType.ERROR, Duration.seconds(5));
                 }
             }
         } catch (SQLException | NullPointerException | ClassNotFoundException e) {

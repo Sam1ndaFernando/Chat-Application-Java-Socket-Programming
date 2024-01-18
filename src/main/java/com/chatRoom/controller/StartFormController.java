@@ -68,7 +68,7 @@ public class StartFormController implements Initializable {
     private void launchServer() {
         new Thread(() -> {
             try {
-                ServerSocket serverSocket = new ServerSocket(3002);
+                ServerSocket serverSocket = new ServerSocket(3535);
                 Server server = new Server(serverSocket);
                 server.startServer();
             } catch (IOException e) {
@@ -76,6 +76,4 @@ public class StartFormController implements Initializable {
             }
         }).start();
     }
-
-
 }

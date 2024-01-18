@@ -3,6 +3,7 @@ package com.chatRoom.client;
 import com.chatRoom.controller.ChatFormController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.DataInputStream;
@@ -38,9 +39,12 @@ public class Client {
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/ChatForm.fxml"));
             stage.setScene(new Scene(fxmlLoader.load()));
+            Image icon = new Image(getClass().getResourceAsStream("/assets/icon.png"));
+            stage.getIcons().add(icon);
             stage.setTitle(userName + "' Room ");
             stage.setResizable(false);
             stage.centerOnScreen();
+
             stage.show();
             chatFormController = fxmlLoader.getController();
             chatFormController.setData(this, userName);
