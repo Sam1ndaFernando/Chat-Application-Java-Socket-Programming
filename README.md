@@ -17,3 +17,7 @@ The Java Chat Application is a real-time messaging platform designed with a laye
 - MySQL for secure and persistent data storage.
 - Maven for streamlined project management.
 - Lombok for code simplification and enhanced readability.
+
+**License:**
+
+This project is subject to the terms of the MIT License.
