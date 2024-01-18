@@ -5,13 +5,11 @@
 
 
 **Project Description:**
-
 The Java Chat Application is a real-time messaging platform designed with a layered architecture, utilizing JavaFX for the user interface, Socket Programming for communication, MySQL for data storage, Maven for project management, and Lombok for code simplification. This application allows users to engage in chat conversations in real-time, providing a seamless and efficient communication experience. The modern UI enhances user-friendliness, ensuring a more intuitive and enjoyable interaction.
 
 
 
 **Key Technologies Used:**
-
 - JavaFX for a sleek and responsive user interface.
 - Socket Programming to enable real-time communication.
 - MySQL for secure and persistent data storage.
@@ -19,5 +17,4 @@ The Java Chat Application is a real-time messaging platform designed with a laye
 - Lombok for code simplification and enhanced readability.
 
 **License:**
-
 This project is subject to the terms of the MIT License.
