@@ -23,19 +23,19 @@ public class NotificationUtil {
 
         switch (type){
             case INFORMATION:
-                notification.graphic(new ImageView(new Image(NotificationUtil.class.getResourceAsStream("/images/info.png"), 80, 80, true, true)));
+                notification.graphic(new ImageView(new Image(NotificationUtil.class.getResourceAsStream("/assets/Notification icons/information.png"), 80, 80, true, true)));
                 break;
 
             case ERROR:
-                notification.graphic(new ImageView(new Image(NotificationUtil.class.getResourceAsStream("/images/info.png"), 80, 80, true, true)));
+                notification.graphic(new ImageView(new Image(NotificationUtil.class.getResourceAsStream("/assets/Notification icons/error.png"), 80, 80, true, true)));
                 break;
 
             case SUCCESS:
-                notification.graphic(new ImageView(new Image(NotificationUtil.class.getResourceAsStream("/images/info.png"), 80, 80, true, true)));
+                notification.graphic(new ImageView(new Image(NotificationUtil.class.getResourceAsStream("/assets/Notification icons/confirm.png"), 80, 80, true, true)));
                 break;
 
             case NOTIFICATION:
-                notification.graphic(new ImageView(new Image(NotificationUtil.class.getResourceAsStream("/images/info.png"), 80, 80, true, true)));
+                notification.graphic(new ImageView(new Image(NotificationUtil.class.getResourceAsStream("/assets/Notification icons/notifications.png"), 80, 80, true, true)));
                 break;
 
         }
