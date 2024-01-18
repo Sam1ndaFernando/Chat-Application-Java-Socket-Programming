@@ -1,5 +1,7 @@
 package com.chatRoom.controller;
 
+import animatefx.animation.Pulse;
+import animatefx.animation.SlideInLeft;
 import com.chatRoom.bo.BOFactory;
 import com.chatRoom.bo.custom.UserBO;
 import com.chatRoom.client.Client;
@@ -9,14 +11,17 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class LoginFormController {
+public class LoginFormController implements Initializable {
 
     @FXML
     private AnchorPane root;
@@ -31,7 +36,11 @@ public class LoginFormController {
     private JFXTextField txtPassField;
 
     UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
+        new Pulse(root).play();
+    }
 
     @FXML
     void btnLaunchOnAction(ActionEvent event) {
@@ -69,5 +78,6 @@ public class LoginFormController {
     public void txtPassFieldOnAction(ActionEvent event) {
         btnLaunchOnAction(event);
     }
+
 
 }

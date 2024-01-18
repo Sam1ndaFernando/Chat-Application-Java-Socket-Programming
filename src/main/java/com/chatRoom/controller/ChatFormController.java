@@ -1,5 +1,6 @@
 package com.chatRoom.controller;
 
+import animatefx.animation.Pulse;
 import com.chatRoom.bo.BOFactory;
 import com.chatRoom.bo.custom.UserBO;
 import com.chatRoom.client.Client;
@@ -149,7 +150,7 @@ public class ChatFormController implements Initializable {
 
         // Create Label and add it to the HBox
         Label label = new Label(txtField.getText());
-        label.setStyle(" -fx-alignment: center-left; -fx-background-color:  #a11d3f; -fx-background-radius:15px 0px 15px 15px; -fx-font-size: 18; -fx-text-fill: #ffffff; -fx-wrap-text: true; -fx-content-display: left; -fx-max-width: 350; -fx-padding: 10;");
+        label.setStyle(" -fx-alignment: center-left; -fx-background-color:  #00D1FF; -fx-background-radius:15px 0px 15px 15px; -fx-font-size: 18; -fx-text-fill: #FFFFFF; -fx-wrap-text: true; -fx-content-display: left; -fx-max-width: 350; -fx-padding: 10;");
         hBox.getChildren().add(label);
         vbox.getChildren().add(hBox);
         txtField.setText("");
@@ -167,7 +168,7 @@ public class ChatFormController implements Initializable {
 
         // Create Label and add it to the HBox
         Label label = new Label(message);
-        label.setStyle(" -fx-alignment: center-left; -fx-background-color:  #45bea8; -fx-background-radius:0px 15px 15px 15px; -fx-font-size: 18px; -fx-text-fill: #ffffff; -fx-wrap-text: true; -fx-content-display: left; -fx-max-width: 350px; -fx-padding: 10px;");
+        label.setStyle(" -fx-alignment: center-left; -fx-background-color:  #A537CA; -fx-background-radius:0px 15px 15px 15px; -fx-font-size: 18px; -fx-text-fill: #FFFFFF; -fx-wrap-text: true; -fx-content-display: left; -fx-max-width: 350px; -fx-padding: 10px;");
         hBox.getChildren().add(label);
         Platform.runLater(() -> vbox.getChildren().add(hBox));
         System.out.println(message);
@@ -197,6 +198,7 @@ public class ChatFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         emojiBar.setVisible(false);
         createEmojiBar();
+        new Pulse(root).play();
     }
 
     private void createEmojiBar() {
@@ -228,7 +230,7 @@ public class ChatFormController implements Initializable {
             for (UserDTO dto : userDTOS) {
                 if(dto.getStatus() != 0){
                     Label label = new Label(dto.getUserName());
-                    label.setStyle("-fx-text-alignment: center; -fx-text-fill: #ffffff; -fx-background-color: green; -fx-font-weight: bold; -fx-font-size: 15px; -fx-background-radius: 10px; -fx-border-width: 5px; -fx-border-color: darkgreen; -fx-min-height: 50px; -fx-min-width: 70px;-fx-padding: 5px");
+                    label.setStyle("-fx-text-alignment: center; -fx-text-fill: #ffffff; -fx-background-color: green; -fx-font-weight: bold; -fx-font-size: 15px; -fx-background-radius: 20px; -fx-border-width: 5px;  -fx-min-height: 50px; -fx-min-width: 70px; -fx-padding: 5px;");
                     hBox.getChildren().add(label);
                 }
             }
