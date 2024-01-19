@@ -38,7 +38,6 @@ public class LoginFormController implements Initializable {
     UserBO userBO = (UserBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.USER);
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         new Pulse(root).play();
     }
 

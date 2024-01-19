@@ -226,9 +226,10 @@ public class ChatFormController implements Initializable {
 
                     // apply different styles to each button
                     if (btnIndex % 2 == 0) {
-                        button.setStyle("-fx-background-radius:20px;-fx-text-alignment: center; -fx-background-color: #B1FFECFF; -fx-text-fill: #000000;");
+                        button.setStyle("-fx-background-radius:10px;-fx-text-alignment: center; -fx-alignment: center; -fx-background-color: #B1FFECFF; -fx-text-fill: #000000;");
                     } else {
-                        button.setStyle("-fx-background-radius:20px;-fx-text-alignment: center; -fx-background-color: #FFD700; -fx-text-fill: #000000;");
+                        button.setStyle("-fx-background-radius:10px;-fx-text-alignment: center; -fx-alignment: center; -fx-background-color: #FFD700; -fx-text-fill: #000000;");
+
                     }
                     button.setAlignment(Pos.CENTER);
                     emojiPane.add(button, column, row);
