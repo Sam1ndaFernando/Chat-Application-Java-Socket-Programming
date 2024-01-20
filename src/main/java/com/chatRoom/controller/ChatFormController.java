@@ -237,7 +237,7 @@ public class ChatFormController implements Initializable {
                     button.setOnAction(event -> {            // add event handler to each button
                         txtField.appendText(button.getText());
                     });
-                    btnIndex++;
+
                 }
             }
         }
