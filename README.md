@@ -1,5 +1,5 @@
 
-### Chat-Application-Java-Socket-Programming
+# Chat-Application-Java-Socket-Programming
 
 ![dstds](https://github.com/Sam1ndaFernando/Chat-Application-Java-Socket-Programming/assets/120486850/cbbbef0e-0da2-4e74-b687-4f5834174c43)
 
