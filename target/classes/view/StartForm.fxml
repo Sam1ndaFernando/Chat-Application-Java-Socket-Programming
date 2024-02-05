@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" prefHeight="800.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chatRoom.controller.StartFormController">
+   <children>
+      <ImageView fitHeight="800.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/Forms/startForm.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="btnStart" layoutX="167.0" layoutY="617.0" onAction="#btnStartOnAction" prefHeight="40.0" prefWidth="167.0" style="-fx-background-color: A537CA; -fx-background-radius: 10;" text="Start Server" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="379.0" fitWidth="506.0" layoutX="-3.0" layoutY="219.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/liveChat.gif" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
