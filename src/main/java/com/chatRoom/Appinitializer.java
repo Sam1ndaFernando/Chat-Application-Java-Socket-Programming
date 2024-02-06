@@ -18,7 +18,7 @@ public class Appinitializer extends Application {
         stage.setResizable(false);
         stage.centerOnScreen();
         stage.setTitle("Start Server Form");
-        Image icon = new Image(getClass().getResourceAsStream("/assets/icon.png"));
-        stage.getIcons().add(icon);
+        /*Image icon = new Image(getClass().getResourceAsStream("/assets/icon.png"));
+        stage.getIcons().add(icon);*/
     }
 }

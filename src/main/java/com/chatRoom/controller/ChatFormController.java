@@ -197,7 +197,7 @@ public class ChatFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         emojiBar.setVisible(false);
         createEmojiBar();
-        new Jello(root).play();
+        new Pulse(root).play();
     }
 
     /*private void createEmojiBar() {
